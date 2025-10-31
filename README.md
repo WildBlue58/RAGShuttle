@@ -1,177 +1,361 @@
-# phoneGPT
+# RAGShuttle (羽智RAG) - 羽毛球专业领域 AI 聊天机器人
 
-- chatbot
-  组件、tailwindcss  messages
-  ai streaming 复杂 封装？
-  大模型
-- 专业领域的chatbot
-  RAG 手机知识库 检索增强生成
-  - 知识库（爬虫）
-  - 向量数据库 supabase
+<div align="center">
 
-## 项目中用到的技术
+![RAGShuttle](https://img.shields.io/badge/RAGShuttle-羽智RAG-blue?style=for-the-badge&logo=badminton)
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![RAG](https://img.shields.io/badge/RAG-Enabled-green?style=for-the-badge)
 
-- RAG 检索增强生成
-  - embedding openai embed  向量化
-  - 相似度 cos  -> 1 倒序
-  - 存到supabase数据库
+一个基于 RAG（检索增强生成）技术的专业领域 AI 聊天机器人，专注于提供准确的羽毛球相关信息问答服务。
 
-### package.json
+[功能特性](#-功能特性) • [技术栈](#-技术栈) • [快速开始](#-快速开始) • [项目结构](#-项目结构) • [部署](#-部署)
 
-- ai sdk
-  build AI-powered applications
-  封装了LLM的调用
-  @ai-sdk/openai  调用LLM
-  @ai-sdk/react hooks api 式一行完成流式输出
-- supabase
-  BASS Backend as Service
-  Postgres 支持 向量数据库
-- langchain
-  LangChain 是一个用于构建 AI 应用的框架，它连接大模型、数据源和工具，简化了从提示工程到链式调用、记忆管理和代理决策的开发流程。
-  @langchain/community  社区提供的工具(爬虫)
-  @langchain/core  核心模块
-- dotenv
-- puppeteer 无头浏览器
-  Puppeteer 是一个 Node.js 库，用于控制无头浏览器（如 Chrome），可自动化网页操作，如截图、爬取数据、测试交互等。
-- lucide-react  是一个轻量、开源的 React 图标库
-- react-markdown  是一个 React 组件，用于渲染 Markdown 文本
+</div>
 
-## Next.js
+---
 
-- layout metadata
-  SEO
-- "use client"; 是 Next.js 中的指令，用于标记一个组件为客户端组件，使其可以使用 React 的交互功能（如 useState、useEffect）和客户端特有的逻辑。
+## 📋 项目简介
 
-## tailwindcss
+**RAGShuttle (羽智RAG)** 是一个智能聊天机器人应用，结合了 **RAG（检索增强生成）**技术、**向量数据库**和 **大语言模型**，为用户提供专业的羽毛球领域知识问答服务。项目展示了现代全栈开发、AI 应用开发和系统架构设计的最佳实践。
 
-- max-w-3xl
-  响应式的技巧
-  max-w-3xl
-  48rem (适配) 3xl  768px ipad 竖着拿的尺寸
-  移动设备（phone, pad） width = 100% = 100vw
-  PC端 768px, mx-auto
-  Mobile First 移动设备优先
-- 在 Tailwind CSS 中，[] 表示任意值（Arbitrary Value），允许你直接写入自定义的 CSS 值（如 80vh），会被转换为对应的内联样式，实现灵活布局。
+**项目名称含义：**
 
-- @ai-sdk/react
-  hooks 封装chatLLM的功能，方便流式输出。
+- **RAG** - Retrieval-Augmented Generation（检索增强生成），核心技术
+- **Shuttle** - 羽毛球英文术语，代表专业领域
+- **羽智** - 羽毛球智慧，中文名称，简洁易记
 
-## typescript
+### 核心特性
 
-- 组件props 类型定义
+- ✅ **RAG 架构**：结合向量检索和 LLM 生成，确保回答准确性和相关性
+- ✅ **流式输出**：实时显示 AI 回答，提升用户体验
+- ✅ **类型安全**：完整的 TypeScript 类型定义，确保代码质量
+- ✅ **响应式设计**：移动端优先，完美适配各种设备
+- ✅ **错误处理**：完善的错误处理和用户反馈机制
+- ✅ **规范驱动开发**：使用 OpenSpec 进行需求管理和开发流程规范
 
-## 前端部分的亮点
+---
 
-- @ai-sdk/react 对chatBot 响应式业务的封装 一行代码完成流式输出
-  useChat hook
-- react-markdown ai响应 markdown是主要的格式
+## 🚀 功能特性
 
-## -```![]()``` 解析
+### 核心功能
 
-- tailwindcss 适配
-- react组件划分和ts 的类型约束
-  shadcn 按需加载、定制性强
-- lucide-react 图标库
-- useChat 对hooks的理解 响应式业务的封装，一半函数封装的区别
-- prompt 模版设计
-  - 准确
-  - 复用
-  - 格式
-    - 身份
-    - 任务
-    - 分区 context, 和 question
-  - 返回格式
-  - 约束 不回答手机之外的内容
-  - 接受一个参数，函数返回，我们的应用，有几个核心的promptTemplate 构成，用心设计
+1. **智能问答**
+   - 基于向量相似度检索相关上下文
+   - 结合 LLM 生成准确、专业的回答
+   - 支持 Markdown 格式输出，包含链接和引用来源
 
-## 后端亮点
+2. **流式响应**
+   - 实时流式输出，逐字显示 AI 回答
+   - 优化的加载状态和错误提示
 
-- ai streamText 流式输出
-- result.toDataStreamResponse() 将 streamText 生成的流式结果转换为一个可被前端消费的 Response 对象，支持以数据流形式传输 AI 输出，实现逐字显示等实时效果。
-- 爬虫脚本
-  - seed 脚本任务
-    npm run seed
-    填充知识库
-  - seed.ts 编写这个脚本
-    ts 文件不可以直接运行
-    ts-node + typescript 可以直接运行
-    先解析成js, 再运行。
-- langchain Agent 开发框架
-  coze  promptTempate  记忆MessageMemory Community
-- 正则html替换
-- vercel的AI版图
-  - next.js
-  - ai-sdk
-  - js 的云端运行环境
-  - v0 bolt
-      ai-sdk/react 流式输出-> prompt -> embedding
-      网页（wikipidia）-> langchain/community+puppeteer(爬取)->  
-      langchain提供的分块机制（chunks? 段落 ）-> embeding -> supabase 存储
+3. **知识库管理**
+   - 支持从 Wikipedia 等网页爬取内容
+   - 自动文本分块和向量化
+   - 高效的向量相似度搜索
 
-  - 向量存储
-  CREATE TABLE public.chunks (
-    id uuid NOT NULL DEFAULT gen_random_uuid(),
-    content text null,
-    vector extensions.vector null,
-    url text null,
-    date_updated timestamp without time zone DEFAULT now(),
-    CONSTRAINT chunks_pkey PRIMARY KEY (id)
-  );
+### 技术亮点
 
-## 遇到的问题
+- **RAG 实现**：完整的检索增强生成流程
+- **向量数据库**：使用 Supabase + pgvector 进行高效的语义搜索
+- **AI SDK 集成**：使用 Vercel AI SDK 实现流式输出
+- **现代化 UI**：shadcn/ui + Tailwind CSS，美观且可定制
+- **类型安全**：严格的 TypeScript 类型检查
 
-- ai-sdk检索的时候， LLM 给了老版本的代码 调试出了问题，mcp 解决问题
-- ts-node 编译时不支持esm,
-  tsconfig.json ts 配置文件
-  支持ts-node commonjs
+---
 
-- rpc 调用
-  在supabase 数据库中调用函数
+## 🛠 技术栈
 
-  ```sql
+### 前端
 
-create or replace function get_relevant_chunks(
-  -- 一个长度为 1536 的“向量”
+- **Next.js 15** - React 框架，App Router
+- **React 19** - UI 框架
+- **TypeScript 5** - 类型安全
+- **Tailwind CSS 4** - 样式框架
+- **shadcn/ui** - 组件库
+- **lucide-react** - 图标库
+- **react-markdown** - Markdown 渲染
+
+### 后端与 AI
+
+- **Vercel AI SDK** - AI 应用开发框架
+  - `@ai-sdk/openai` - OpenAI LLM 调用
+  - `@ai-sdk/react` - React Hooks，流式输出
+- **Supabase** - Backend as a Service
+  - PostgreSQL + pgvector 向量扩展
+  - 向量相似度搜索
+- **LangChain** - AI 应用框架
+  - `@langchain/community` - 网页爬虫工具
+  - `@langchain/core` - 核心模块
+
+### 工具与依赖
+
+- **Puppeteer** - 无头浏览器，网页爬取
+- **dotenv** - 环境变量管理
+- **ts-node** - TypeScript 执行环境
+
+---
+
+## 🚀 快速开始
+
+### 环境要求
+
+- Node.js 18+
+- npm / pnpm / yarn
+- Chrome 浏览器（用于 Puppeteer）
+
+### 安装步骤
+
+1. **克隆项目**
+
+```bash
+git clone <repository-url>
+cd ragshuttle
+```
+
+2. **安装依赖**
+
+```bash
+npm install
+# 或
+pnpm install
+```
+
+3. **配置环境变量**
+
+创建 `.env.local` 文件：
+
+```env
+# OpenAI 配置
+OPENAI_API_KEY=your_openai_api_key
+OPENAI_API_BASE_URL=https://api.openai.com/v1  # 可选
+
+# Supabase 配置
+SUPABASE_URL=your_supabase_url
+SUPABASE_KEY=your_supabase_service_key
+```
+
+4. **初始化数据库**
+
+在 Supabase 中执行以下 SQL：
+
+```sql
+-- 创建 chunks 表
+CREATE TABLE public.chunks (
+  id uuid NOT NULL DEFAULT gen_random_uuid(),
+  content text null,
+  vector extensions.vector(1536) null,
+  url text null,
+  date_updated timestamp without time zone DEFAULT now(),
+  CONSTRAINT chunks_pkey PRIMARY KEY (id)
+);
+
+-- 创建向量搜索函数
+CREATE OR REPLACE FUNCTION get_relevant_chunks(
   query_vector vector(1536),
-  -- 只找“相似度”超过这个值的结果
   match_threshold float,
-  -- 最多返回多少条结果。
   match_count int
-
 )
-// 返回表格结果
-returns table (
+RETURNS TABLE (
   id uuid,
   content text,
   url text,
   date_updated timestamp,
   similarity float
 )
--- 这个函数执行完后，会返回一个“表格形式”的结果。
-language sql stable
--- 说明这个函数是用 SQL 语言写的，并且是“稳定的”
--- 函数内容开始。
-as $$
-  select
+LANGUAGE sql STABLE
+AS $$
+  SELECT
     id,
     content,
     url,
     date_updated,
-    -- chunks.vector <=> query_vector 是 pgvector 扩展提供的“距离”计算
-    1 - (chunks.vector <=> query_vector) as similarity
-  from chunks
-  where 1 - (chunks.vector <=> query_vector) > match_threshold
-  order by similarity desc
-  limit match_count;
-  -- 函数内容结束。
+    1 - (vector <=> query_vector) as similarity
+  FROM chunks
+  WHERE 1 - (vector <=> query_vector) > match_threshold
+  ORDER BY similarity DESC
+  LIMIT match_count;
 $$;
+```
 
-  ```
-- 向量的相似度计算
-  - mysql 不支持，postgresql 支持，
-  <=> 距离计算
-  - 1->
-  - 数据库支持函数
-    传参
-    制定返回的内容
-    构建sql
+5. **填充知识库**
+
+```bash
+npm run seed
+```
+
+6. **启动开发服务器**
+
+```bash
+npm run dev
+```
+
+访问 [http://localhost:3000](http://localhost:3000) 查看应用。
+
+---
+
+## 📁 项目结构
+
+> 💡 查看 [详细的项目结构说明](./docs/project-structure.md) 了解完整的目录组织方式
+
+```
+RAGShuttle/
+├── app/                          # Next.js App Router
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.ts         # 聊天 API 路由（RAG 实现）
+│   ├── globals.css               # 全局样式
+│   ├── layout.tsx                # 根布局
+│   └── page.tsx                  # 主页面
+├── components/                    # React 组件
+│   ├── ui/                       # shadcn/ui 组件
+│   │   ├── button.tsx
+│   │   └── input.tsx
+│   ├── ChatInput.tsx            # 聊天输入组件
+│   └── ChatOutput.tsx           # 聊天输出组件
+├── lib/                          # 工具函数和配置
+│   ├── utils.ts                 # 通用工具函数
+│   ├── types/                   # TypeScript 类型定义
+│   │   └── index.ts
+│   └── constants/               # 常量配置
+│       └── index.ts
+├── scripts/                      # 脚本文件
+│   └── seed.ts                  # 知识库填充脚本
+├── openspec/                     # OpenSpec 规范文档
+│   ├── project.md               # 项目上下文
+│   ├── specs/                   # 功能规范
+│   └── changes/                 # 变更提案
+├── package.json                  # 项目依赖
+├── tsconfig.json                 # TypeScript 配置
+└── README.md                     # 项目文档
+```
+
+---
+
+## 🏗 架构设计
+
+### RAG 流程
+
+1. **用户提问** → 生成文本向量嵌入（OpenAI Embedding）
+2. **向量检索** → 在 Supabase 中搜索相似内容（pgvector）
+3. **上下文注入** → 将检索结果作为上下文注入 Prompt
+4. **LLM 生成** → 使用 GPT-4o-mini 生成回答
+5. **流式输出** → 实时返回回答给前端
+
+### 数据流
+
+```
+用户输入 → Embedding → 向量搜索 → 上下文检索 
+  ↓
+Prompt 构建 → LLM 生成 → 流式输出 → 前端渲染
+```
+
+---
+
+## 🎨 UI/UX 特性
+
+- **响应式设计**：移动端优先，完美适配各种屏幕
+- **现代化界面**：使用 shadcn/ui 组件，美观且一致
+- **实时反馈**：加载状态、错误提示、流式输出动画
+- **无障碍支持**：遵循 WCAG 标准，支持屏幕阅读器
+
+---
+
+## 📝 开发规范
+
+### 代码风格
+
+- TypeScript 严格模式
+- 函数式组件 + React Hooks
+- 完整的类型定义
+- 中文代码注释
+
+### 提交规范
+
+- 使用简体中文提交信息
+- 格式：`动词 + 描述`
+- 示例：`修复向量检索阈值问题`、`优化聊天界面响应式布局`
+
+---
+
+## 🚢 部署
+
+> 💡 查看 [详细的部署指南](./docs/deployment.md) 了解完整的部署流程
+
+### 快速部署（Vercel）
+
+1. 推送代码到 GitHub
+2. 在 [Vercel](https://vercel.com) 中导入项目
+3. 配置环境变量
+4. 部署完成
+
+### 环境变量配置
+
+确保在部署平台配置以下环境变量：
+
+- `OPENAI_API_KEY`
+- `OPENAI_API_BASE_URL` (可选)
+- `SUPABASE_URL`
+- `SUPABASE_KEY`
+
+---
+
+## 🧪 测试
+
+```bash
+# 类型检查
+npm run type-check
+
+# 构建生产版本
+npm run build
+
+# 启动生产服务器
+npm start
+```
+
+---
+
+## 📚 更多文档
+
+- **[📚 文档中心](./docs/README.md)** - 完整的文档索引
+- **[🚀 部署指南](./docs/deployment.md)** - 详细部署说明
+- **[🤝 贡献指南](./docs/contributing.md)** - 如何参与贡献
+- **[✨ 技术亮点](./docs/project-highlights.md)** - 核心技术总结
+- **[📁 项目结构](./docs/project-structure.md)** - 目录结构说明
+
+### 学习资源
+
+- [Next.js 文档](https://nextjs.org/docs)
+- [Vercel AI SDK](https://sdk.vercel.ai/docs)
+- [Supabase 向量搜索](https://supabase.com/docs/guides/ai)
+- [LangChain 文档](https://js.langchain.com/)
+
+---
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！查看 [贡献指南](./docs/contributing.md) 了解详情。
+
+---
+
+## 📄 许可证
+
+MIT License
+
+---
+
+## 🙏 致谢
+
+- [Vercel AI SDK](https://sdk.vercel.ai/) - 优秀的 AI 应用开发框架
+- [Supabase](https://supabase.com/) - 强大的 Backend as a Service
+- [shadcn/ui](https://ui.shadcn.com/) - 美观的组件库
+
+---
+
+<div align="center">
+
+**用 ❤️ 和 ☕ 构建**
+
+Made with Next.js, TypeScript, and RAG
+
+</div>

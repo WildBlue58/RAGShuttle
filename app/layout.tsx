@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "phoneGPT",
-  description: "An AI Chatbot that demonstrates the basic concepts of RAG",
+  title: "RAGShuttle | 羽智RAG",
+  description: "羽毛球专业领域 AI 聊天机器人，基于 RAG 技术提供准确的羽毛球信息问答服务",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
